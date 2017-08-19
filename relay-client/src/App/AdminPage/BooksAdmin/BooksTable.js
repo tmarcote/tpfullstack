@@ -18,7 +18,7 @@ const booksTableQuery = graphql`
   }
 `;
 
-const BooksTable = ({ books }) =>
+const BooksTable = ({ books, onSelect }) =>
   <Col md={12}>
     <Table striped bordered condensed hover>
       <thead>
@@ -30,7 +30,7 @@ const BooksTable = ({ books }) =>
         </tr>
       </thead>
       <tbody>
-        {books.edges.map((item, key) => <BookRow book={item.node} key={key} />)}
+        {books.edges.map((item, key) => <BookRow book={item.node} key={key} onSelect />)}
       </tbody>
     </Table>
   </Col>;

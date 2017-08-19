@@ -21,7 +21,7 @@ const CategoriesTable = ({ categories }) =>
       <thead>
         <tr>
           <th>#</th>
-          <th>Labellllllll</th>
+          <th>Title</th>
           <th>Actions</th>
         </tr>
       </thead>

@@ -9,18 +9,21 @@ class BooksAdmin extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      tableKey: 'default'
+      tableKey: 'default',
+      selected: null,
+      removeCandidate: null
     };
   }
 
   hideModal() {
     this.setState(prevState => ({
       ...prevState,
-      showModal: false
+      showModal: false,
+      selected: null
     }));
   }
 
-  showModal() {
+  addBook() {
     this.setState(prevState => ({
       ...prevState,
       showModal: true
@@ -30,13 +33,21 @@ class BooksAdmin extends React.Component {
   onSave(book) {
     this.setState(prevState => ({
       ...prevState,
-      table: book.id,
+      tableKey: book.id,
       showModal: false
     }));
   }
 
+  updateBook(book) {
+    this.setState(prevState => ({
+      ...prevState,
+      showModal: true,
+      selected: book
+    }));
+  }
+
   render() {
-    const { showModal, table } = this.state;
+    const { showModal, tableKey, selected, removeCandidate } = this.state;
 
     return (
       <div>
@@ -47,7 +58,7 @@ class BooksAdmin extends React.Component {
         <Row>
           <Col md={12}>
             <div className={styles.mainAction}>
-              <Button bsStyle="primary" bsSize="xs" onClick={() => this.showModal()}>
+              <Button bsStyle="primary" bsSize="xs" onClick={() => this.addBook()}>
                 New Book
               </Button>
             </div>
@@ -55,11 +66,11 @@ class BooksAdmin extends React.Component {
         </Row>
 
         <Row>
-          <BooksTable key={table} />
+          <BooksTable key={tableKey} onSelect={book => this.updateBook(book)}/>
           <BookModal
             onCancel={() => this.hideModal()}
             show={showModal}
-            book={null}
+            book={selected}
             onSave={book => this.onSave(book)}
           />
         </Row>
