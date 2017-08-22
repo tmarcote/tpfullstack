@@ -9,6 +9,10 @@ const bookFragment = graphql`
     title
     author
     image
+    categories {
+      id
+      label
+    }
   }
 `;
 

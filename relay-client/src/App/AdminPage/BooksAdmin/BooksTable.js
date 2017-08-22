@@ -30,12 +30,12 @@ const BooksTable = ({ books, onSelect }) =>
         </tr>
       </thead>
       <tbody>
-        {books.edges.map((item, key) => <BookRow book={item.node} key={key} onSelect />)}
+        {books.edges.map((item, key) => <BookRow book={item.node} key={key} onSelect={onSelect} />)}
       </tbody>
     </Table>
   </Col>;
 
-const BooksTableRenderer = ({ books, match }) =>
+const BooksTableRenderer = ({ onSelect, books, match }) =>
   <QueryRenderer
     environment={environment}
     query={booksTableQuery}
@@ -46,7 +46,7 @@ const BooksTableRenderer = ({ books, match }) =>
     render={({ error, props }) => {
       if (error) return <ErrorAlert error={error} />;
 
-      if (props) return <BooksTable {...props} />;
+      if (props) return <BooksTable {...props} onSelect={onSelect} />;
 
       return <LoadingSpinner />;
     }}

@@ -13,6 +13,10 @@ export type BookRow_book = {|
   +title: ?string;
   +author: ?string;
   +image: ?string;
+  +categories: ?$ReadOnlyArray<?{|
+    +id: string;
+    +label: ?string;
+  |}>;
 |};
 */
 
@@ -49,6 +53,31 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "image",
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "args": null,
+      "concreteType": "Category",
+      "name": "categories",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "id",
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "args": null,
+          "name": "label",
+          "storageKey": null
+        }
+      ],
       "storageKey": null
     }
   ],

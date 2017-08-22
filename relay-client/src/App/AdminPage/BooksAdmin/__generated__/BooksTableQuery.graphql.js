@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e7861ff968cb62cc0b43fcfc74a067c7
+ * @relayHash c763d42c057bedd4637b95f6ba79e012
  */
 
 /* eslint-disable */
@@ -48,6 +48,10 @@ fragment BookRow_book on Book {
   title
   author
   image
+  categories {
+    id
+    label
+  }
 }
 */
 
@@ -237,6 +241,31 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   },
                   {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Category",
+                    "name": "categories",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "label",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
@@ -330,7 +359,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query BooksTableQuery(\n  $categoryId: String\n  $count: Int!\n  $cursor: String\n) {\n  books(first: $count, categoryId: $categoryId, after: $cursor) {\n    edges {\n      node {\n        ...BookRow_book\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment BookRow_book on Book {\n  id\n  title\n  author\n  image\n}\n"
+  "text": "query BooksTableQuery(\n  $categoryId: String\n  $count: Int!\n  $cursor: String\n) {\n  books(first: $count, categoryId: $categoryId, after: $cursor) {\n    edges {\n      node {\n        ...BookRow_book\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment BookRow_book on Book {\n  id\n  title\n  author\n  image\n  categories {\n    id\n    label\n  }\n}\n"
 };
 
 module.exports = batch;
