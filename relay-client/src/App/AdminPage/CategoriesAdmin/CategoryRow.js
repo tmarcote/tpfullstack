@@ -11,7 +11,7 @@ const categoryFragment = graphql`
   }
 `;
 
-const CategoryRow = ({ category }) =>
+const CategoryRow = ({ category, onSelect, onDelete }) =>
   <tr key={category.id}>
     <td>
       {category.id}
@@ -21,10 +21,10 @@ const CategoryRow = ({ category }) =>
     </td>
     <td>
       <ButtonToolbar className={styles.toolbar}>
-        <Button bsStyle="info" bsSize="xsmall">
+        <Button bsStyle="info" bsSize="xsmall" onClick={() => onSelect(category)}>
           Edit
         </Button>
-        <Button bsStyle="danger" bsSize="xsmall">
+        <Button bsStyle="danger" bsSize="xsmall" onClick={() => onDelete(category)}>
           Remove
         </Button>
       </ButtonToolbar>

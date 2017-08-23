@@ -11,7 +11,8 @@ exports.add = category =>
 
 exports.update = category =>
   mongo.collection('categories').then(col => {
-    return col.findOneAndUpdate({ _id: category._id }, category);
+    const categoryData = Object.assign(category, { _id: category.id }, { id: undefined });
+    return col.findOneAndUpdate({ _id: category._id }, category).then(r => category);
   });
 
 exports.remove = id =>

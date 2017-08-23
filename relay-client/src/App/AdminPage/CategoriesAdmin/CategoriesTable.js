@@ -15,7 +15,7 @@ const categoriesTableQuery = graphql`
   }
 `;
 
-const CategoriesTable = ({ categories }) =>
+const CategoriesTable = ({ categories, onSelect, onDelete }) =>
   <Col md={12}>
     <Table striped bordered condensed hover>
       <thead>
@@ -26,7 +26,7 @@ const CategoriesTable = ({ categories }) =>
         </tr>
       </thead>
       <tbody>
-        {categories.map((item, key) => <CategoryRow category={item} key={key} />)}
+        {categories.map((item, key) => <CategoryRow category={item} key={key} onSelect={onSelect} onDelete={onDelete}/>)}
       </tbody>
     </Table>
   </Col>;
@@ -35,7 +35,7 @@ CategoriesTable.propTypes = {
   categories: PropTypes.array.isRequired
 };
 
-const CategoriesTableRenderer = ({ match }) =>
+const CategoriesTableRenderer = ({ onSelect, onDelete, match }) =>
   <QueryRenderer
     environment={environment}
     query={categoriesTableQuery}
@@ -45,7 +45,7 @@ const CategoriesTableRenderer = ({ match }) =>
     render={({ error, props }) => {
       if (error) return <ErrorAlert error={error} />;
 
-      if (props) return <CategoriesTable {...props} />;
+      if (props) return <CategoriesTable {...props} onSelect={onSelect} onDelete={onDelete}/>;
 
       return <LoadingSpinner />;
     }}

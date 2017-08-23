@@ -113,7 +113,7 @@ class CategoriesAdmin extends React.Component {
           <CategoryModal
             onCancel={() => this.hideModal()}
             show={showModal}
-            book={selected}
+            category={selected}
             onSave={category => this.onSave(category)}
           />
           {removeCandidate && removeStatus === 'init' &&
