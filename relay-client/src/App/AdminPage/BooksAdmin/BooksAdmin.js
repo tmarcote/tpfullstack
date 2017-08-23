@@ -128,7 +128,7 @@ class BooksAdmin extends React.Component {
             onCancel={() => this.cancelRemove()} />}
             {removeStatus === 'failure' && <Row>
             <Alert bsStyle="danger">
-              <h4>There was an error trying to delete the category.</h4>
+              <h4>There was an error trying to delete the book.</h4>
               <p>{error}</p>
             </Alert>
           </Row>}

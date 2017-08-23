@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLList, GraphQLSchema, GraphQLString, GraphQLNonNull } = require('graphql');
 const { connectionArgs } = require('graphql-relay');
-const { categoryType } = require('./types/category');
+const { categoryType, categoryConnection, categoryMutation } = require('./types/category');
 const { bookType, bookConnection, bookMutation } = require('./types/book');
 const { nodeField } = require('./node');
 
@@ -46,7 +46,10 @@ var mutationType = new GraphQLObjectType({
   fields: () => ({
     createBook: bookMutation.createBook,
     updateBook: bookMutation.updateBook,
-    deleteBook: bookMutation.deleteBook
+    deleteBook: bookMutation.deleteBook,
+    createCategory: categoryMutation.createCategory,
+    updateCategory: categoryMutation.updateCategory,
+    deleteCategory: categoryMutation.deleteCategory
   })
 });
 

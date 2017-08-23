@@ -66,6 +66,17 @@ type CreateBookPayload {
   clientMutationId: String
 }
 
+input CreateCategoryInput {
+  # The category name.
+  label: String
+  clientMutationId: String
+}
+
+type CreateCategoryPayload {
+  category: Category
+  clientMutationId: String
+}
+
 input DeleteBookInput {
   # The book unique id.
   id: ID!
@@ -77,10 +88,24 @@ type DeleteBookPayload {
   clientMutationId: String
 }
 
+input DeleteCategoryInput {
+  # The category unique id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCategoryPayload {
+  category: Category
+  clientMutationId: String
+}
+
 type Mutation {
   createBook(input: CreateBookInput!): CreateBookPayload
   updateBook(input: UpdateBookInput!): UpdateBookPayload
   deleteBook(input: DeleteBookInput!): DeleteBookPayload
+  createCategory(input: CreateCategoryInput!): CreateCategoryPayload
+  updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload
+  deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload
 }
 
 # An object with an ID
@@ -137,5 +162,19 @@ input UpdateBookInput {
 
 type UpdateBookPayload {
   book: Book
+  clientMutationId: String
+}
+
+input UpdateCategoryInput {
+  # The category unique id.
+  id: ID!
+
+  # The category label.
+  label: String
+  clientMutationId: String
+}
+
+type UpdateCategoryPayload {
+  category: Category
   clientMutationId: String
 }
