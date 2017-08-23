@@ -144,7 +144,7 @@ class BookModal extends Component {
               />
             </FormGroup>
             <FormGroup controlId="bookForm">
-              <ControlLabel>Title</ControlLabel>
+              <ControlLabel>Image</ControlLabel>
               <FormControl
                 type="text"
                 value={book.image}

@@ -16,7 +16,7 @@ const bookFragment = graphql`
   }
 `;
 
-const BookRow = ({ book, onSelect }) =>
+const BookRow = ({ book, onSelect, onDelete }) =>
   <tr key={book.id}>
     <td>
       {book.id}
@@ -32,7 +32,7 @@ const BookRow = ({ book, onSelect }) =>
         <Button bsStyle="info" bsSize="xsmall" onClick={() => onSelect(book)}>
           Edit
         </Button>
-        <Button bsStyle="danger" bsSize="xsmall">
+        <Button bsStyle="danger" bsSize="xsmall" onClick={() => onDelete(book)}>
           Remove
         </Button>
       </ButtonToolbar>
