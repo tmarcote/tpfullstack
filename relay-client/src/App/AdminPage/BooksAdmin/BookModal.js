@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
 import createBookMutation from './mutations/createBook';
+import updateBookMutation from './mutations/updateBook';
 import CategorySelector from './CategorySelector';
 
 class BookModal extends Component {
@@ -67,9 +68,33 @@ class BookModal extends Component {
           error: err
         }))
     );
+    this.setState(prevState => ({
+      ...prevState,
+      loading: false,
+    }))
   }
 
-  update(book) {}
+  update(book) {
+    this.setState(prevState => ({
+      ...prevState,
+      loading: true,
+      error: null
+    }));
+    updateBookMutation(
+      book,
+      response => this.props.onSave(response.updateBook.book),
+      err =>
+        this.setState(prevState => ({
+          ...prevState,
+          loading: false,
+          error: err
+        }))
+    );
+    this.setState(prevState => ({
+      ...prevState,
+      loading: false,
+    }))
+  }
 
   updateCategories(data) {
     this.setState(prevState => ({
