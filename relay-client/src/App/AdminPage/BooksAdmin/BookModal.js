@@ -74,6 +74,9 @@ class BookModal extends Component {
   }
 
   update(book) {
+    if(book.categories.length && typeof book.categories[0] !== 'string') {
+      book.categories = book.categories.map(item => item.id)
+    }
     this.setState(prevState => ({
       ...prevState,
       loading: true,
@@ -96,7 +99,6 @@ class BookModal extends Component {
   }
 
   updateCategories(data) {
-    console.log('se llama al onchange')
     this.setState(prevState => ({
       ...prevState,
       book: {
