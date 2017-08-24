@@ -6,3 +6,15 @@
   justify-content: flex-end;
   margin-bottom: 15px;
 }
+
+.searchInput > input {
+  width: 100%;
+  font-size: 22px;
+  border: none;
+  border-bottom:solid #008CBA 1px;
+  margin-bottom: 20px;
+}
+
+.searchInput > input:focus {
+  outline: none;
+}

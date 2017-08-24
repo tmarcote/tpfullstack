@@ -18,7 +18,7 @@ const booksTableQuery = graphql`
   }
 `;
 
-const BooksTable = ({ books, onSelect, onDelete }) =>
+const BooksTable = ({ books, onSelect, onDelete, searchTerm }) =>
   <Col md={12}>
     <Table striped bordered condensed hover>
       <thead>
@@ -30,12 +30,12 @@ const BooksTable = ({ books, onSelect, onDelete }) =>
         </tr>
       </thead>
       <tbody>
-        {books.edges.map((item, key) => <BookRow book={item.node} key={key} onSelect={onSelect} onDelete={onDelete}/>)}
+        {books.edges.map((item, key) => <BookRow book={item.node} key={key} onSelect={onSelect} onDelete={onDelete} searchTerm={searchTerm}/>)}
       </tbody>
     </Table>
   </Col>;
 
-const BooksTableRenderer = ({ onSelect, onDelete, books, match }) =>
+const BooksTableRenderer = ({ onSelect, onDelete, books, match, searchTerm }) =>
   <QueryRenderer
     environment={environment}
     query={booksTableQuery}
@@ -46,7 +46,7 @@ const BooksTableRenderer = ({ onSelect, onDelete, books, match }) =>
     render={({ error, props }) => {
       if (error) return <ErrorAlert error={error} />;
 
-      if (props) return <BooksTable {...props} onSelect={onSelect} onDelete={onDelete}/>;
+      if (props) return <BooksTable {...props} onSelect={onSelect} onDelete={onDelete} searchTerm={searchTerm}/>;
 
       return <LoadingSpinner />;
     }}

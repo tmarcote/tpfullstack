@@ -6,6 +6,7 @@ import BookModal from './BookModal';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import deleteBookMutation from './mutations/deleteBook';
 import cryptoRandomString from 'crypto-random-string';
+import SearchInput from 'react-search-input';
 
 class BooksAdmin extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class BooksAdmin extends React.Component {
       selected: null,
       removeCandidate: null,
       removeStatus: 'init',
-      error: null
+      error: null,
+      searchTerm: ''
     };
   }
 
@@ -89,8 +91,15 @@ class BooksAdmin extends React.Component {
     }))
   }
 
+  searchUpdated(term) {
+    this.setState(prevState => ({
+      ...prevState,
+      searchTerm: term
+    }))
+  }
+
   render() {
-    const { showModal, tableKey, selected, removeCandidate, removeStatus, error } = this.state;
+    const { showModal, tableKey, selected, removeCandidate, removeStatus, error, searchTerm } = this.state;
 
     return (
       <div>
@@ -109,7 +118,13 @@ class BooksAdmin extends React.Component {
         </Row>
 
         <Row>
-          <BooksTable key={tableKey} onSelect={book => this.updateBook(book)} onDelete={book => this.requestConfirmation(book)} />
+          <Col md={12}>
+            <SearchInput className={styles.searchInput} onChange={(term) => this.searchUpdated(term)}/>
+          </Col>
+        </Row>
+
+        <Row>
+          <BooksTable key={tableKey} onSelect={book => this.updateBook(book)} onDelete={book => this.requestConfirmation(book)} searchTerm={searchTerm}/>
           <BookModal
             onCancel={() => this.hideModal()}
             show={showModal}

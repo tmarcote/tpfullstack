@@ -35,7 +35,6 @@ class BookModal extends Component {
   }
 
   handleChange(e, key) {
-    console.log('handleChange');
     const value = e.target.value;
 
     this.setState(prevState => ({
@@ -97,6 +96,7 @@ class BookModal extends Component {
   }
 
   updateCategories(data) {
+    console.log('se llama al onchange')
     this.setState(prevState => ({
       ...prevState,
       book: {

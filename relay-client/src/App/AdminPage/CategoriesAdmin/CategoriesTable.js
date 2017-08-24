@@ -15,7 +15,7 @@ const categoriesTableQuery = graphql`
   }
 `;
 
-const CategoriesTable = ({ categories, onSelect, onDelete }) =>
+const CategoriesTable = ({ categories, onSelect, onDelete, searchTerm }) =>
   <Col md={12}>
     <Table striped bordered condensed hover>
       <thead>
@@ -26,7 +26,7 @@ const CategoriesTable = ({ categories, onSelect, onDelete }) =>
         </tr>
       </thead>
       <tbody>
-        {categories.map((item, key) => <CategoryRow category={item} key={key} onSelect={onSelect} onDelete={onDelete}/>)}
+        {categories.map((item, key) => <CategoryRow category={item} key={key} onSelect={onSelect} onDelete={onDelete} searchTerm={searchTerm}/>)}
       </tbody>
     </Table>
   </Col>;
@@ -35,7 +35,7 @@ CategoriesTable.propTypes = {
   categories: PropTypes.array.isRequired
 };
 
-const CategoriesTableRenderer = ({ onSelect, onDelete, match }) =>
+const CategoriesTableRenderer = ({ onSelect, onDelete, match, searchTerm }) =>
   <QueryRenderer
     environment={environment}
     query={categoriesTableQuery}
@@ -45,7 +45,7 @@ const CategoriesTableRenderer = ({ onSelect, onDelete, match }) =>
     render={({ error, props }) => {
       if (error) return <ErrorAlert error={error} />;
 
-      if (props) return <CategoriesTable {...props} onSelect={onSelect} onDelete={onDelete}/>;
+      if (props) return <CategoriesTable {...props} onSelect={onSelect} onDelete={onDelete} searchTerm={searchTerm}/>;
 
       return <LoadingSpinner />;
     }}

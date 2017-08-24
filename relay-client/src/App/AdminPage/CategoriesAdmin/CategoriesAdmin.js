@@ -6,6 +6,7 @@ import CategoryModal from './CategoryModal';
 import cryptoRandomString from 'crypto-random-string';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import deleteCategoryMutation from './mutations/deleteCategory';
+import SearchInput from 'react-search-input'
 
 class CategoriesAdmin extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class CategoriesAdmin extends React.Component {
       selected: null,
       removeCandidate: null,
       removeStatus: 'init',
-      error: null
+      error: null,
+      searchTerm: ''
     };
   }
 
@@ -89,8 +91,15 @@ class CategoriesAdmin extends React.Component {
     }))
   }
 
+  searchUpdated(term) {
+    this.setState(prevState => ({
+      ...prevState,
+      searchTerm: term
+    }))
+  }
+
   render() {
-    const { showModal, tableKey, selected, removeCandidate, removeStatus, error } = this.state;
+    const { showModal, tableKey, selected, removeCandidate, removeStatus, error, searchTerm } = this.state;
 
     return (
       <div>
@@ -109,7 +118,13 @@ class CategoriesAdmin extends React.Component {
         </Row>
 
         <Row>
-          <CategoriesTable key={tableKey} onSelect={category => this.updateCategory(category)} onDelete={category => this.requestConfirmation(category)} />
+          <Col md={12}>
+            <SearchInput className={styles.searchInput} onChange={(term) => this.searchUpdated(term)}/>
+          </Col>
+        </Row>
+
+        <Row>
+          <CategoriesTable key={tableKey} onSelect={category => this.updateCategory(category)} onDelete={category => this.requestConfirmation(category)} searchTerm={searchTerm} />
           <CategoryModal
             onCancel={() => this.hideModal()}
             show={showModal}
